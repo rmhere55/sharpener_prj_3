@@ -1,12 +1,12 @@
-// src/Components/Header.js
 import React from 'react';
-import { Heading } from '@chakra-ui/react';
+import { Heading, Box, Text } from '@chakra-ui/react';
 
-const Header = ({ blogCount }) => {
+const Header = ({ postCount }) => {
   return (
-    <Heading as="h1" mb={4} textAlign="center">
-      My Blog ({blogCount} {blogCount === 1 ? 'Post' : 'Posts'})
-    </Heading>
+    <Box textAlign="center" mb={4}>
+      <Heading as="h1">My Blog</Heading>
+      <Text mt={2}>Posts Count: {postCount}</Text>
+    </Box>
   );
 };
 

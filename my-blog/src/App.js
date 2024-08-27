@@ -1,20 +1,47 @@
-// src/App.js
-import React from 'react';
-import { Container } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Container, Heading, VStack, Button } from '@chakra-ui/react';
 import Header from './Components/Header';
-import Post from './Components/Post';
+import PostForm from './Components/PostForm';
+import PostList from './Components/PostList';
 
 function App() {
-  // Create an array of posts to pass to the Post component
-  const posts = [
-    { id: 1, title: 'First Post', content: 'This is the content of the first post. You can write anything here.' },
-    { id: 2, title: 'Second Post', content: 'This is the content of the second post. Add as many posts as you like!' },
-  ];
+  const [posts, setPosts] = useState([]);
+  const [currentPost, setCurrentPost] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleAddPost = (post) => {
+    setPosts([...posts, post]);
+  };
+
+  const handleEditPost = (post) => {
+    setCurrentPost(post);
+    setIsEditing(true);
+  };
+
+  const handleUpdatePost = (updatedPost) => {
+    setPosts(posts.map(post => post.id === updatedPost.id ? updatedPost : post));
+    setCurrentPost(null);
+    setIsEditing(false);
+  };
+
+  const handleDeletePost = (postId) => {
+    setPosts(posts.filter(post => post.id !== postId));
+  };
 
   return (
     <Container maxW="container.md" py={8}>
-      <Header blogCount={posts.length} />
-      <Post posts={posts} />
+      <Header count={posts.length} />
+      <PostForm
+        onAddPost={handleAddPost}
+        currentPost={currentPost}
+        isEditing={isEditing}
+        onUpdatePost={handleUpdatePost}
+      />
+      <PostList
+        posts={posts}
+        onEditPost={handleEditPost}
+        onDeletePost={handleDeletePost}
+      />
     </Container>
   );
 }
