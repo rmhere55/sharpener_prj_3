@@ -73,7 +73,7 @@ const LandingPage = () => {
         </div>
       
       {/* Menu Section */}
-      <div className=" flex  mt-[5%] items-center justify-center w-[65%] my-8">
+      <div className=" flex  mt-[5%] items-center justify-center w-[65%] my-8 ">
         <Menu />
       </div>
     </div>
