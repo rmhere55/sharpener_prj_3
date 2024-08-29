@@ -1,51 +1,3 @@
-
-// import React from 'react';
-
-// const Cards = ({ cartItems, onClose, onClearCart }) => {
-//   return (
-//     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-//       <div className="bg-white p-6 rounded-lg shadow-lg w-[300px]">
-//         <h3 className="text-lg font-semibold text-gray-800">Your Order</h3>
-//         {cartItems.length === 0 ? (
-//           <p className="text-sm font-semibold italic text-gray-600">No items in your cart.</p>
-//         ) : (
-//           <ul>
-//             {cartItems.map((item, index) => (
-//               <li key={index} className="mb-2">
-//                 <p className="text-sm font-semibold">{item.name}</p>
-//                 <p className="text-xs italic text-gray-600">{item.description}</p>
-//                 <p className="text-xs text-yellow-600">{item.price}</p>
-//                 <p className="text-xs">Amount: {item.amount}</p>
-//               </li>
-//             ))}
-//           </ul>
-//         )}
-
-//         <div className="flex justify-between items-center mt-4">
-//           <button
-//             onClick={onClose}
-//             className="bg-gray-300 text-gray-800 px-4 py-2 rounded"
-//           >
-//             Close
-//           </button>
-//           <button 
-//             onClick={() => {
-//               onClearCart();
-//               alert('Order placed!');
-//             }} 
-//             className="bg-[#76210C] text-white px-4 py-2 rounded"
-//           >
-//             Order
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Cards;
-
-
 import React from 'react';
 import { useCart } from './CartContext';
 
@@ -53,28 +5,30 @@ const Cards = ({ onClose }) => {
   const { cartItems, clearCart, increaseItemAmount, decreaseItemAmount, getTotalAmount } = useCart();
 
   return (
-    <div className="fixed inset-0 flex  items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white w-[28vw]   p-6 rounded-lg shadow-lg w-[300px]">
-        <h1 className="text-xl font-bold text-black-800">Your Order</h1>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white w-[28vw] p-8 rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">Your Order</h1>
         {cartItems.length === 0 ? (
-          <p className="text-sm font-semibold  text-gray-800">No items in your cart.</p>
+          <p className="text-sm font-semibold text-gray-800">No items in your cart.</p>
         ) : (
-          <ul>
+          <ul className="divide-y divide-gray-200">
             {cartItems.map((item, index) => (
-              <li key={index} className="mb-2">
-                <p className="text-sm font-semibold">{item.name}</p>
-                <div className="flex items-center justify-between">
-                  <p className="text-lg">${(parseFloat(item.price.slice(1)) * item.amount).toFixed(2)}</p>
-                  <div className="flex items-center">
-                    <button 
-                      className="text-lg px-2 py-1 border border-gray-300 rounded"
+              <li key={index} className="py-4">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h1 className="text-xl font-bold text-black">{item.name}</h1>
+                    <p className="text-lg text-red-800">${item.price}</p>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <button
+                      className="text-lg text-white bg-[#76210C] hover:bg-[#5e1a14] px-2 py-1 "
                       onClick={() => decreaseItemAmount(item.name)}
                     >
                       -
                     </button>
-                    <span className="mx-2">{item.amount}</span>
-                    <button 
-                      className="text-lg px-2 py-1 border border-gray-300 rounded"
+                    <span className="text-xl font-semibold">{item.amount}</span>
+                    <button
+                      className="text-lg text-white bg-[#76210C] hover:bg-[#5e1a14] px-2 py-1 "
                       onClick={() => increaseItemAmount(item.name)}
                     >
                       +
@@ -85,23 +39,24 @@ const Cards = ({ onClose }) => {
             ))}
           </ul>
         )}
-        <div className="flex justify-between items-center mt-4">
-          <p className="text-lg font-bold">Total: ${getTotalAmount().toFixed(2)}</p>
+        <div className="flex justify-between items-center mt-6 border-t pt-4">
+          <h1 className="text-xl font-bold text-black">Total Amount</h1>
+          <h2 className="text-xl font-bold text-black">${getTotalAmount().toFixed(2)}</h2>
         </div>
-        <div className="flex justify-between items-center mt-4">
+        <div className="flex justify-between items-center mt-6">
           <button
             onClick={onClose}
-            className="bg-gray-200 text-gray-800  hover:bg-gray-300 px-4 py-2 rounded"
+            className="text-gray-800 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full"
           >
             Close
           </button>
-          <button 
+          <button
             onClick={() => {
               clearCart();
               alert('Order placed!');
               onClose();
-            }} 
-            className="bg-[#76210C]   hover:bg-[#5e1a14] text-white px-4 py-2 rounded"
+            }}
+            className="text-white bg-[#76210C] hover:bg-[#5e1a14] px-4 py-2 rounded-full"
           >
             Order
           </button>
@@ -109,6 +64,6 @@ const Cards = ({ onClose }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Cards;
