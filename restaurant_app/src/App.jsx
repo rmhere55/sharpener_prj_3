@@ -5,7 +5,6 @@ import LandingPage from './Components/LandingPage'
 const App = () => {
   return (
     <>
-    {/* <Header/> */}
     <LandingPage/>
     </>
   )

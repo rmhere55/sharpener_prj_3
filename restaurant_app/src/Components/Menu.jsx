@@ -1,6 +1,8 @@
-import React from "react";
 
-const Menu = () => {
+
+import React, { useState } from "react";
+
+const Menu = ({ onAddToCart }) => {
   const menuItems = [
     {
       name: "Sushi",
@@ -24,16 +26,8 @@ const Menu = () => {
     },
   ];
 
-  // const [addCount, setAddCount] = useState(0);
-
-
-  // const handleAddtoItem = () => {
-  //   setAddCount(cartCount + 1);
-  // };
-
-
   return (
-    <div className="w-[80%] mx-auto  bg-white shadow-lg rounded-t-2xl overflow-hidden">
+    <div className="w-[80%] mx-auto bg-white shadow-lg rounded-t-2xl overflow-hidden">
       {menuItems.map((item, index) => (
         <div
           key={index}
@@ -60,8 +54,12 @@ const Menu = () => {
               />
             </div>
             <button
-              type="button"  className="bg-[#76210C] text-white font-semibold rounded px-4 py-2 hover:bg-[#5e1a14] transition"
-              // onClick = { hhhh}
+              type="button" 
+              className="bg-[#76210C] text-white font-semibold rounded px-4 py-2 hover:bg-[#5e1a14] transition"
+              onClick={() => onAddToCart({
+                ...item,
+                amount: parseInt(document.getElementById(`amount-${index}`).value, 10),
+              })}
             >
               + Add
             </button>
@@ -73,3 +71,4 @@ const Menu = () => {
 };
 
 export default Menu;
+
