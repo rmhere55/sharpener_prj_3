@@ -43,7 +43,7 @@ const Cards = ({ onClose }) => {
           <h1 className="text-xl font-bold text-black">Total Amount</h1>
           <h2 className="text-xl font-bold text-black">${getTotalAmount().toFixed(2)}</h2>
         </div>
-        <div className="flex justify-between items-center mt-6">
+        <div className="flex justify-end px-1 gap-3 items-center mt-6">
           <button
             onClick={onClose}
             className="text-gray-800 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full"
